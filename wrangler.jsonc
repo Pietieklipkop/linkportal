@@ -2,12 +2,59 @@
 	"$schema": "./node_modules/wrangler/config-schema.json",
 	"name": "linkportal",
 	"compatibility_date": "2026-07-04",
-	"compatibility_flags": ["nodejs_als"],
+	"compatibility_flags": ["nodejs_compat"],
 	"main": ".svelte-kit/cloudflare/_worker.js",
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
 	},
+	"vars": {
+		"BETTER_AUTH_URL": "https://linkportal.pietieklipkop.workers.dev,https://*-linkportal.pietieklipkop.workers.dev"
+	},
+	"secrets": {
+		"required": ["BETTER_AUTH_SECRET"]
+	},
+	"env": {
+		"staging": {
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_name": "linkportal-staging",
+					"database_id": "STAGING_DATABASE_ID",
+					"migrations_dir": "./drizzle"
+				}
+			],
+			"vars": {
+				"BETTER_AUTH_URL": "https://linkportal.pietieklipkop.workers.dev,https://*-linkportal.pietieklipkop.workers.dev"
+			},
+			"secrets": {
+				"required": ["BETTER_AUTH_SECRET"]
+			}
+		}
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "linkportal",
+			"database_id": "PRODUCTION_DATABASE_ID",
+			"migrations_dir": "./drizzle"
+		}
+	],
 	"workers_dev": true,
-	"preview_urls": true
+	"preview_urls": true,
+	"observability": {
+		"enabled": false,
+		"head_sampling_rate": 1,
+		"logs": {
+			"enabled": true,
+			"head_sampling_rate": 1,
+			"persist": true,
+			"invocation_logs": true
+		},
+		"traces": {
+			"enabled": true,
+			"persist": true,
+			"head_sampling_rate": 1
+		}
+	}
 }

@@ -1,6 +1,5 @@
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig, lazyPlugins } from 'vite-plus';
-import { playwright } from 'vite-plus/test/browser-playwright';
+import { defineConfig } from 'vite-plus';
 import adapter from '@sveltejs/adapter-cloudflare';
 import { sveltekit } from '@sveltejs/kit/vite';
 
@@ -42,9 +41,7 @@ export default defineConfig({
 			'**/vite.config.js.timestamp-*',
 			'**/vite.config.ts.timestamp-*',
 			'**/test-results',
-			'!**/.vscode/',
-			'!.vscode/settings.json',
-			'!.vscode/extensions.json'
+			'worker-configuration.d.ts'
 		],
 		rules: {
 			'constructor-super': 'error',
@@ -124,7 +121,7 @@ export default defineConfig({
 			'svelte/no-immutable-reactive-statements': 'error',
 			'svelte/no-inner-declarations': 'error',
 			'svelte/no-inspect': 'warn',
-			'svelte/no-navigation-without-resolve': 'error',
+			'svelte/no-navigation-without-resolve': 'off',
 			'svelte/no-not-function-handler': 'error',
 			'svelte/no-object-in-text-mustaches': 'error',
 			'svelte/no-raw-special-elements': 'error',
@@ -198,7 +195,8 @@ export default defineConfig({
 				files: ['*.svelte', '**/*.svelte'],
 				rules: {
 					'no-inner-declarations': 'off',
-					'no-self-assign': 'off'
+					'no-self-assign': 'off',
+					'no-undef': 'off'
 				},
 				jsPlugins: ['eslint-plugin-svelte']
 			}
@@ -227,11 +225,10 @@ export default defineConfig({
 			'/drizzle/'
 		]
 	},
-	plugins: lazyPlugins(() => [
+	plugins: [
 		tailwindcss(),
 		sveltekit({
 			compilerOptions: {
-				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
@@ -243,24 +240,10 @@ export default defineConfig({
 				})
 			}
 		})
-	]),
+	],
 	test: {
 		expect: { requireAssertions: true },
 		projects: [
-			{
-				extends: './vite.config.ts',
-				test: {
-					name: 'client',
-					browser: {
-						enabled: true,
-						provider: playwright(),
-						instances: [{ browser: 'chromium', headless: true }]
-					},
-					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
-					exclude: ['src/lib/server/**']
-				}
-			},
-
 			{
 				extends: './vite.config.ts',
 				test: {

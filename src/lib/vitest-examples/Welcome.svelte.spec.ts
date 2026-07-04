@@ -1,5 +1,7 @@
+/* eslint-disable vite-plus/prefer-vite-plus-imports */
+/// <reference types="vitest/browser" />
 import { page } from 'vite-plus/test/browser';
-import { describe, expect, it } from 'vite-plus/test';
+import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import Welcome from './Welcome.svelte';
 
