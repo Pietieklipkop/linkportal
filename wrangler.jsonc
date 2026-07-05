@@ -9,7 +9,8 @@
 		"directory": ".svelte-kit/cloudflare"
 	},
 	"vars": {
-		"BETTER_AUTH_URL": "https://linkportal.pietieklipkop.workers.dev,https://*-linkportal.pietieklipkop.workers.dev"
+		"BETTER_AUTH_URL": "https://linkportal.pietieklipkop.workers.dev,https://*-linkportal.pietieklipkop.workers.dev",
+		"RESEND_API_KEY": "re_9yK94uEC_BQaJvdmXcW1mg38bRPuBPNT4"
 	},
 	"secrets": {
 		"required": ["BETTER_AUTH_SECRET"]
@@ -24,8 +25,15 @@
 					"migrations_dir": "./drizzle"
 				}
 			],
+			"r2_buckets": [
+				{
+					"binding": "STORAGE",
+					"bucket_name": "linkportal-attachments-staging"
+				}
+			],
 			"vars": {
-				"BETTER_AUTH_URL": "https://linkportal.pietieklipkop.workers.dev,https://*-linkportal.pietieklipkop.workers.dev"
+				"BETTER_AUTH_URL": "https://linkportal.pietieklipkop.workers.dev,https://*-linkportal.pietieklipkop.workers.dev",
+				"RESEND_API_KEY": "re_9yK94uEC_BQaJvdmXcW1mg38bRPuBPNT4"
 			},
 			"secrets": {
 				"required": ["BETTER_AUTH_SECRET"]
@@ -38,6 +46,12 @@
 			"database_name": "linkportal",
 			"database_id": "PRODUCTION_DATABASE_ID",
 			"migrations_dir": "./drizzle"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "STORAGE",
+			"bucket_name": "linkportal-attachments"
 		}
 	],
 	"workers_dev": true,
