@@ -44,7 +44,7 @@
 		{
 			"binding": "DB",
 			"database_name": "linkportal",
-			"database_id": "PRODUCTION_DATABASE_ID",
+			"database_id": "126ffb56-cdf6-487c-9837-5d444b139baa",
 			"migrations_dir": "./drizzle"
 		}
 	],

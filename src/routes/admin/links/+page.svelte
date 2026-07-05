@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { page } from '$app/state';
 	import { Plus, Paperclip, Copy, ExternalLink, Edit2, FileText, MoveLeft, Settings, Eye, Check } from 'lucide-svelte';
-	import { getConversionRate } from '$lib/server/utils';
+	import { getConversionRate } from '$lib/utils';
 
 	let { data, form } = $props<{
 		data: {
