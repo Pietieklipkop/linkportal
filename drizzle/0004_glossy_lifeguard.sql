@@ -1,0 +1,1 @@
+ALTER TABLE `form_link` ADD `company` text DEFAULT 'LinkPortal' NOT NULL;

@@ -1,0 +1,2 @@
+ALTER TABLE `form_link` ADD `notification_email` text DEFAULT 'admin@linkportal.com' NOT NULL;--> statement-breakpoint
+ALTER TABLE `form_link` ADD `email_body` text DEFAULT 'Hello, a new submission has been received from {name} {surname}.' NOT NULL;
