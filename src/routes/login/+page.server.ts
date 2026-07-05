@@ -67,6 +67,9 @@ export const actions: Actions = {
 	},
 	signOut: async (event) => {
 		event.cookies.delete('better-auth.session-token', { path: '/' });
+		event.cookies.delete('better-auth.session_token', { path: '/' });
+		event.cookies.delete('__Secure-better-auth.session-token', { path: '/' });
+		event.cookies.delete('__Secure-better-auth.session_token', { path: '/' });
 		return redirect(302, '/login');
 	}
 };
