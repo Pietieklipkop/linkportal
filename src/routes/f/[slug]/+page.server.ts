@@ -82,9 +82,9 @@ export const actions: Actions = {
 				message
 			});
 
-			// Trigger Resend API alert
+			// Trigger Resend API alert only if type is 'client'
 			const apiKey = env.RESEND_API_KEY || event.platform?.env?.RESEND_API_KEY;
-			if (apiKey) {
+			if (apiKey && type === 'client') {
 				let bodyContent = formDetails.emailBody || 'New submission received.';
 				bodyContent = bodyContent
 					.replace(/{name}/g, name)
